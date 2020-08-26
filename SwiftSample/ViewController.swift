@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad()
     {
+        self.view.backgroundColor = UIColor.white
+        
         let graphqlUrl = "https://hiw-stylus-mobile-sensor-uploads.nyc3.digitaloceanspaces.com/20200505-1588817811-789101112.json"
         let secretAccessKey = "YEQNNHPDTCAWU4TDN2KP"
         let accessKeyId = "d5bn7ih0rJUbange7Kx0B5jXWiVdYJPHpYLxV384IG0"
