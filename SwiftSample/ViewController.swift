@@ -15,8 +15,8 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         
         let graphqlUrl = "https://hiw-stylus-mobile-sensor-uploads.nyc3.digitaloceanspaces.com/20200505-1588817811-789101112.json"
-        let secretAccessKey = "YEQNNHPDTCAWU4TDN2KP"
-        let accessKeyId = "d5bn7ih0rJUbange7Kx0B5jXWiVdYJPHpYLxV384IG0"
+        let secretAccessKey = "d5bn7ih0rJUbange7Kx0B5jXWiVdYJPHpYLxV384IG0"
+        let accessKeyId = "YEQNNHPDTCAWU4TDN2KP"
         let parameters = self.getStaticSensorData()
         
         let sessionConfig = URLSessionConfiguration.default
@@ -28,7 +28,8 @@ class ViewController: UIViewController {
         request.httpMethod = "PUT"
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+//        request.addValue("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", forHTTPHeaderField: "X-Amz-Content-Sha256")
+
         request.httpBody = parameters.data(using: String.Encoding.utf8)
         
                     guard let signedRequest = URLRequestSigner().sign(request: request, secretSigningKey: secretAccessKey, accessKeyId: accessKeyId) else { return }
@@ -58,3 +59,10 @@ class ViewController: UIViewController {
 
 }
 
+/* From Postman
+ (lldb) NSDictionary *headers = @{
+ @"X-Amz-Content-Sha256": @"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+ @"X-Amz-Date": @"20200826T075308Z",
+ @"Authorization": @"AWS4-HMAC-SHA256 Credential=YEQNNHPDTCAWU4TDN2KP/20200826/nyc3/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-meta-hiw-mbl-os;x-amz-meta-hiw-mbl-uid;x-amz-meta-hiw-mbl-vr;x-amz-meta-hiw-styl-hw-id;x-amz-meta-hiw-styl-snsr-col-end-tmstmp;x-amz-meta-hiw-styl-snsr-col-strt-tmstmp, Signature=01d89e900633a2b8e9297e6507040f59d55d0ca32f40ce5e8c750b87dae59121"
+
+ */
